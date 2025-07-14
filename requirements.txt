@@ -19,7 +19,7 @@ gTTS>=2.5
 
 # Speech recognition
 SpeechRecognition>=3.8.1
-PyAudio==0.2.14  # Required for microphone input
+#PyAudio==0.2.14  # Required for microphone input
 
 # Translation
 deep-translator>=1.11.4
