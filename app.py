@@ -12,14 +12,14 @@ from src.helper import (
     translate_text,
     web_search_snippet
 )
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 # --- DEBUGGING AID: Check if script runs multiple times ---
 print("Streamlit app script started!")
 # --- END DEBUGGING AID ---
 
 # Load environment variables
-#load_dotenv()
+load_dotenv()
 st.set_page_config("Information Retrieval System")
 st.title("PDF Reader + Audio Assistant")
 

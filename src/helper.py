@@ -10,7 +10,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 from deep_translator import GoogleTranslator
 from duckduckgo_search import DDGS
-
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.vectorstores import FAISS
@@ -18,8 +17,17 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 
 # ========== ENV SETUP ========== #
-import streamlit as st
-api_key = st.secrets["GOOGLE_API_KEY"]
+
+try:
+    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+except st.errors.StreamlitAPIException:
+    from dotenv import load_dotenv
+    load_dotenv()
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+if not GOOGLE_API_KEY:
+    raise ValueError("No API key found. Please add it to .env or secrets.toml")
+
 
 
 
@@ -50,14 +58,14 @@ def get_text_chunks(text, chunk_size=1000, chunk_overlap=200):
 def get_vector_store(chunks):
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001",
-        google_api_key=API_KEY
+        google_api_key=GOOGLE_API_KEY
     )
     return FAISS.from_texts(chunks, embedding=embeddings)
 
 def get_conversational_chain(vector_store):
     llm = ChatGoogleGenerativeAI(
         model="gemini-1.5-flash",
-        google_api_key=API_KEY,
+        google_api_key=GOOGLE_API_KEY,
         temperature=0.3
     )
     memory = ConversationBufferMemory(
@@ -103,7 +111,7 @@ def classify_voice_intent(text: str) -> str:
     prompt = f"""Classify the user instruction into one of two categories: 'command' or 'question'.\nInstruction: \"{text}\"\nOnly respond with 'command' or 'question'."""
     llm = ChatGoogleGenerativeAI(
         model="gemini-1.5-flash",
-        google_api_key=API_KEY,
+        google_api_key=GOOGLE_API_KEY,
         temperature=0
     )
     return llm.invoke(prompt).strip().lower()
