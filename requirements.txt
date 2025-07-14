@@ -30,11 +30,3 @@ duckduckgo-search>=8.1.1
 # Others used internally (safe defaults)
 requests>=2.31
 urllib3>=2.0
-
-
-
-
-
-
-
-
