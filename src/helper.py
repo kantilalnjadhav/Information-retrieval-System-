@@ -2,7 +2,7 @@ import os
 import textwrap
 import re
 from io import BytesIO
-from dotenv import load_dotenv
+
 from PyPDF2 import PdfReader
 from gtts import gTTS
 import speech_recognition as sr
@@ -18,11 +18,14 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 
 # ========== ENV SETUP ========== #
-load_dotenv()
-API_KEY = os.getenv("GOOGLE_API_KEY")
+import streamlit as st
+api_key = st.secrets["GOOGLE_API_KEY"]
 
-if not API_KEY:
-    raise ValueError("❌ GOOGLE_API_KEY not found in .env")
+#load_dotenv()
+#API_KEY = os.getenv("GOOGLE_API_KEY")
+
+#if not API_KEY:
+    #raise ValueError("❌ GOOGLE_API_KEY not found in .env")
 
 # ========== HELPER FUNCTIONS ========== #
 def get_pdf_text(pdf_files):
