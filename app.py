@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-from dotenv import load_dotenv
 import base64
 import streamlit.components.v1 as components
 from src.helper import (
@@ -13,6 +12,7 @@ from src.helper import (
     translate_text,
     web_search_snippet
 )
+#from dotenv import load_dotenv
 
 # --- DEBUGGING AID: Check if script runs multiple times ---
 print("Streamlit app script started!")
