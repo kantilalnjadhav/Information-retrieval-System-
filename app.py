@@ -19,7 +19,7 @@ print("Streamlit app script started!")
 # --- END DEBUGGING AID ---
 
 # Load environment variables
-load_dotenv()
+#load_dotenv()
 st.set_page_config("Information Retrieval System")
 st.title("PDF Reader + Audio Assistant")
 

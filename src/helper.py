@@ -21,6 +21,8 @@ from langchain.memory import ConversationBufferMemory
 import streamlit as st
 api_key = st.secrets["GOOGLE_API_KEY"]
 
+
+
 #load_dotenv()
 #API_KEY = os.getenv("GOOGLE_API_KEY")
 
